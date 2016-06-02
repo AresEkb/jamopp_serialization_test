@@ -1,0 +1,19 @@
+modeltype JAVA uses 'http://www.emftext.org/java';
+
+transformation NewTransformation(out j : JAVA);
+
+main() {
+    xmap toCompilationUnit();
+}
+
+mapping toCompilationUnit() : JAVA::containers::CompilationUnit
+{
+    name := 'test';
+    namespaces := Sequence { 'ns' };
+    classifiers := object JAVA::classifiers::Class {
+        name := 'SomeClass';
+        _extends := object JAVA::types::ClassifierReference {
+            target := result.getStringClass();
+        };
+    }    
+}
