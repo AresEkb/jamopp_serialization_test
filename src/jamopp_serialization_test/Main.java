@@ -28,6 +28,8 @@ public class Main {
     	final URI transformationURI = URI.createFileURI(new File(transformation).getAbsolutePath());
     	final String output = "output/test_stand_alone.java";
     	final URI outputURI = URI.createFileURI(new File(output).getAbsolutePath());
+    	final String lang = "lib/java/lang/package-info.java"; //file needs to exist with content 'package java.lang;'
+    	final URI langURI = URI.createFileURI(new File(lang).getAbsolutePath());
     	
         ResourceSet rs = new ResourceSetImpl();
         JaMoPPUtil.initialize();
@@ -36,8 +38,9 @@ public class Main {
 	    ExecutionContextImpl context = new ExecutionContextImpl();
 	    context.setConfigProperty("keepModeling", true);
 	    context.setLog(new WriterLog(new OutputStreamWriter(System.out)));
+	    ModelExtent inLang = new BasicModelExtent(rs.getResource(langURI, true).getContents());
 	    ModelExtent outputModel = new BasicModelExtent();
-	    ExecutionDiagnostic result = executor.execute(context, outputModel);
+	    ExecutionDiagnostic result = executor.execute(context, inLang, outputModel);
 	    
 	    if(result.getSeverity() == Diagnostic.OK) {
 	        try {

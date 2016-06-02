@@ -1,6 +1,6 @@
 modeltype JAVA uses 'http://www.emftext.org/java';
 
-transformation NewTransformation(out j : JAVA);
+transformation NewTransformation(in lang : JAVA, out j : JAVA);
 
 main() {
     xmap toCompilationUnit();

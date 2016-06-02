@@ -1,7 +1,7 @@
 package ns;
 
 
-class SomeClass extends {
+class SomeClass extends String {
 }
 
 
